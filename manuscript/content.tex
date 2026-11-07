@@ -1,0 +1,192 @@
+{\small\sffamily \textbf{Abstract.} \articleABSTRACT\par}
+\smallskip
+{\small\sffamily A partial replication of Almeida~\cite{almeida2023}.\par}
+
+\section{Introduction}
+
+A Bloom filter gives a fast answer to a membership query. It can return a
+false positive for an absent key. The probability usually reported is an
+average over absent keys. If one key is tested against many filters, the
+probability for that key matters instead. In a standard Bloom filter,
+several hash probes can land on the same bit. A repeated probe
+leaves one fewer bit for the query to check.
+
+Almeida~\cite{almeida2023} compares standard and partitioned Bloom filters at finite sizes.
+This replication covers four tables and two curves in Sections 3 and 4,
+plus the three double-hashing mechanisms in Section 5. An exact
+extension computes how often the double-hashing mechanisms
+produce false positives under a uniform hash-pair model.
+
+\section{Methods}
+
+A standard filter has one array of $m$ bits. Each insertion sets $k$
+positions and a query is positive if all its positions are set. In a
+partitioned filter, each of $k$ equal parts has $s=m/k$ bits and receives one
+position per key. A collision between two positions within the index
+range of a part leaves two different physical bits because the positions
+belong to different parts.
+
+\subsection{Independent hashing}
+
+Fix a query that requires $d$ distinct physical bits. After $t$ insertion
+probes, let $p_t(j)$ be the probability that exactly $j$ of those bits
+have been set. Start with $p_0(0)=1$. A new independent uniform probe
+sets a previously unset query bit with probability $(d-j)/m$.
+The probability of satisfying the query after $kn$ probes is
+$p_{kn}(d)$. This gives the same quantity as Almeida's conditional
+false-positive probability, using a recurrence on the number of covered
+query bits.
+
+The program runs one chain with $d=k$. For a query that needs $d$ bits,
+it averages $\binom{j}{d}/\binom{k}{d}$ over the chain's final state.
+The ratio is the chance that the $d$ required bits are among the $j$
+covered bits. To obtain the global rate, the program averages over
+the number of distinct positions in $k$ independent query probes. The partitioned
+rate under independent hashing is
+$[1-(1-1/s)^n]^k$. Each part has one required position and its insertion
+draws are independent of the other parts. The approximate standard
+formula in the source raises expected bit occupancy to the $k$th power.
+
+\subsection{Naive double hashing}
+
+Two uniform residues $(a,b)$ generate the sequence $a+ib$ modulo $m$,
+or modulo $s$ inside each partition. A standard filter treats the
+sequence as an unordered set of bits. A partitioned filter keeps the
+index $i$ as part of the physical address.
+
+To compute an exact rate for a fixed query, enumerate all possible
+insertion pairs. For each subset $U$ of the query's required bits, count
+how many insertion pairs avoid every bit in $U$. The chance that all
+$n$ insertions avoid $U$ is the $n$th power of that fraction. Summing over
+$U$ with sign $(-1)^{|U|}$ gives the chance that every required bit has
+been set. The calculation retains dependence among the $k$ bits
+within each insertion pair.
+
+\subsection{Comparison protocol}
+
+For $m$ bits, $k$ probes, and a fraction $f$ of nominal capacity, the
+primary analysis uses $n=\lfloor f(m/k)\log 2\rfloor$ insertions. The
+source gives the nominal capacity as a real number. The printed $F_a$ values in Table~1 identify the floor count in all
+eight nominal-load configurations.
+For reduced load, the floor is an explicit interpretation. A computed
+cell matches if it rounds to the published value, allowing $10^{-12}$
+for numerical error at the boundary.
+
+An integer inclusion-exclusion calculation checks the recurrence across
+the table grid. Tiny exhaustive enumerations check both layouts under
+independent and double hashing. The direct simulation builds 120,000
+independent filters for each load at $m=64,k=4$. Within each filter it
+tests one fixed query for each distinct-bit count, from one to four. At
+full load it also tests a fresh random query per standard filter and
+runs a separate set of 120,000 partitioned filters. Wilson intervals
+describe each marginal probability. The queries share filters within
+a trial, so the intervals are neither independent nor simultaneous.
+
+\section{Average false-positive rates}
+
+At nominal capacity, the independent calculation matches all 24
+$F_a$, $F_s$, and $F_p$ cells in Almeida's Table~1 at their printed
+precision. Seven of the eight ratios match. The exception is
+$m=64,k=8$, where the paper gives 1.21703762 and the exact calculation
+gives 1.21703636. The reconstructed size sweep (Figure~\ref{fig:mean})
+shows the same broad pattern as the source's Figure~3. The ratio
+approaches one as the filter grows. With $k=16$, the ratio is about
+1.098 at $m=512$ and about 1.011 at $m=4096$.
+
+\input{generated/mean-figure.tex}
+
+The reduced-load differences are larger. Table~\ref{tab:comparison}
+shows the four largest Table~2 discrepancies, all at $m=64$. Seven of the
+16 reduced-load values in the source table differ at the printed
+precision. The eighth mismatch in the table is the nominal-load
+ratio repeated from Table~1. Switching from floor to nearest or ceiling
+reconciles none of the printed exceptions.
+\input{generated/comparison-table.tex}
+
+No choice of a common positive integer insertion count produces these
+four ratios. Set $a=(1-1/m)^k$ and $b=1-k/m$. Then $0\le b\le a<1$.
+For every integer $n\ge1$, the lower bound $F_a\le F_s$ gives
+\[
+  \frac{F_p}{F_s}
+  \le \frac{F_p}{F_a}
+  =\left(\frac{1-b}{1-a}
+     \frac{\sum_{j=0}^{n-1} b^j}{\sum_{j=0}^{n-1} a^j}\right)^k
+  \le \left(\frac{1-b}{1-a}\right)^k.
+\]
+The bound is 1.09842 for four probes and 1.54612 for eight. The
+reported half- and quarter-load ratios exceed these bounds. The source
+formulas leave the cause of the difference unresolved.
+
+\section{False positives for a fixed key}
+
+The conditional rate rises as repeated probes reduce the number of
+distinct bits the query needs. Thirty-two of the 48 cells in Almeida's
+Table~3 match, including all 16 at nominal load. All 20 cells of
+Table~4 match. The mismatches in Table~3 occur at reduced load. For
+example, at $m=64,k=4$ and quarter load, a one-bit query has a rate
+581.88 times the global average in this calculation, compared with
+804.25 in the paper. In the reconstructed model the one-bit rate is
+11.84\%, and the global rate is about 0.0203\%.
+
+The tail plot (Figure~\ref{fig:tail}) reconstructs the source's
+Figure~4. For $m=512,k=16$ at nominal load, at least three collisions
+occur for about one query in 914. For these queries, the false-positive
+rate is at least 6.78 times the global rate. At least five collisions
+occur for about one in 1.34 million, with a rate of about 28.30 times
+the global rate. These thresholds refer to collision classes of absent
+queries under independent uniform hashing.
+
+\input{generated/tail-figure.tex}
+
+\input{generated/simulation-results.tex}
+
+\section{Double hashing}
+
+At $m=512,k=8$, a standard filter with step $b=0$, $256$, or $128$
+touches one, two, or four physical bits, respectively. Using zero, half,
+or a quarter of the part size as the step in a partitioned filter still
+touches eight bits. The pairs $(7,5)$ and $(42,-5)$ visit the same
+standard-filter bits in reverse order. Their partitioned addresses have no overlap. The
+pairs $(7,5)$ and $(12,5)$ share seven standard-filter positions and
+no partitioned positions. These three
+examples recover the mechanisms in Almeida's Figures~5--7.
+
+The enumeration measures how these cases affect false positives.
+For a standard filter, translation removes the starting residue.
+Multiplication by an odd unit modulo 512 preserves the insertion-pair
+law and maps steps with the same greatest common divisor to each
+other. Each step class thus has one fixed-key rate.
+For a partitioned query with pair $(a_q,b_q)$, subtracting the query's
+pair from each insertion pair maps the query to $(0,0)$ while
+preserving the insertion law. Every fixed query therefore has the same rate
+in this model.
+
+\input{generated/double-hash-table.tex}
+
+At $n=44$, the zero-step standard query has a 49.81\% false-positive
+rate and accounts for one in 512 hash pairs. The average standard
+double-hashing rate is 0.649\%. Every fixed partitioned query has a
+1.442\% rate, which also gives its global rate. Partitioning removes the
+step-dependent variation in this model and raises the average at this
+configuration. The 0.390\% partitioned result under independent hashing
+uses a different joint distribution of insertion probes.
+
+\section{Scope and availability}
+
+The independent implementation recovers the nominal-load comparison and
+the concentration of false positives among keys with repeated probes.
+At low load, several printed ratios remain unresolved. The artifact
+preserves each source value beside the computed value, along with the
+model and integer count used for the comparison.
+
+The results concern uniform hash outputs at finite filter sizes. The
+experiment does not measure deployed hash functions, workload-dependent
+key frequencies, SIMD throughput, or the applications in Sections~6 and
+7 of the source. The double-hashing extension covers one allocation and
+one load. The comparison values come from the public accepted manuscript,
+arXiv:2009.11789v2. The original author's code and experiments were
+not used, and the author has not been contacted about the discrepancies.
+
+The companion artifact contains the code, transcribed values, and
+generated tables and plots. A single Python command reruns the
+experiment offline. The PDF build reads the generated results.

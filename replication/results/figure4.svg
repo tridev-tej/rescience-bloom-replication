@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="white"/>
+<g font-family="serif" font-size="21" fill="#111">
+<text x="480" y="30" text-anchor="middle">Figure 4 reconstruction: inverse upper tail (display cutoff 1e-7)</text>
+<path d="M90 65V450H845" fill="none" stroke="#111"/>
+<text x="465" y="510" text-anchor="middle">Upper-tail probability</text>
+<text transform="translate(24 260) rotate(-90)" text-anchor="middle">Per-element / global FPR</text>
+<path d="M90.000 450v6" stroke="#111"/><text x="90.000" y="478" text-anchor="middle">1e-07</text>
+<path d="M197.143 450v6" stroke="#111"/><text x="197.143" y="478" text-anchor="middle">1e-06</text>
+<path d="M304.286 450v6" stroke="#111"/><text x="304.286" y="478" text-anchor="middle">1e-05</text>
+<path d="M411.429 450v6" stroke="#111"/><text x="411.429" y="478" text-anchor="middle">0.0001</text>
+<path d="M518.571 450v6" stroke="#111"/><text x="518.571" y="478" text-anchor="middle">0.001</text>
+<path d="M625.714 450v6" stroke="#111"/><text x="625.714" y="478" text-anchor="middle">0.01</text>
+<path d="M732.857 450v6" stroke="#111"/><text x="732.857" y="478" text-anchor="middle">0.1</text>
+<path d="M840.000 450v6" stroke="#111"/><text x="840.000" y="478" text-anchor="middle">1</text>
+<path d="M84 403.821H840" stroke="#ddd"/><text x="77" y="408.821" text-anchor="end">1</text>
+<path d="M84 250.417H840" stroke="#ddd"/><text x="77" y="255.417" text-anchor="end">10</text>
+<path d="M84 97.013H840" stroke="#ddd"/><text x="77" y="102.013" text-anchor="end">100</text>
+<polyline points="840.000,410.243 728.513,410.243 728.513,361.751 542.880,361.751 542.880,314.053 259.442,314.053 259.442,267.120" fill="none" stroke="#185b91" stroke-width="2.2"/>
+<path d="M650 83h25" stroke="#185b91" stroke-width="2"/><text x="685" y="88">m=64, k=4</text>
+<polyline points="840.000,439.238 793.227,439.238 793.227,381.670 704.631,381.670 704.631,325.210 576.945,325.210 576.945,269.813 408.058,269.813 408.058,215.436 190.111,215.436 190.111,162.039" fill="none" stroke="#b34827" stroke-width="2.2"/>
+<path d="M650 107h25" stroke="#b34827" stroke-width="2"/><text x="685" y="112">m=64, k=8</text>
+<polyline points="840.000,404.612 632.928,404.612 632.928,357.824 349.910,357.824 349.910,311.128" fill="none" stroke="#267d47" stroke-width="2.2"/>
+<path d="M650 131h25" stroke="#267d47" stroke-width="2"/><text x="685" y="136">m=512, k=4</text>
+<polyline points="840.000,407.524 703.729,407.524 703.729,360.363 518.245,360.363 518.245,313.295 292.099,313.295 292.099,266.320" fill="none" stroke="#823f91" stroke-width="2.2"/>
+<path d="M650 155h25" stroke="#823f91" stroke-width="2"/><text x="685" y="160">m=512, k=8</text>
+<polyline points="840.000,419.795 767.565,419.795 767.565,371.866 658.635,371.866 658.635,324.035 522.763,324.035 522.763,276.300 363.867,276.300 363.867,228.662 183.635,228.662 183.635,181.120" fill="none" stroke="#555555" stroke-width="2.2"/>
+<path d="M650 179h25" stroke="#555555" stroke-width="2"/><text x="685" y="184">m=512, k=16</text>
+</g></svg>

@@ -1,0 +1,14 @@
+{
+  "PROTOCOL.md": "c4ce70b03c79cf94e34e903d14f23d8245699dae283e1c6738f7d02e87b352e9",
+  "SOURCE.md": "ceed3d168f303584df03799fa2ebde3abaf583199d83a6f995b8c24122c9f3d0",
+  "replication/VALIDATION_PLAN.md": "ed8865cab47543a98efb84c877b82c7cf340d496963cde3766b8ae824541bcab",
+  "replication/bloom.py": "fa58c8e792944d8c0ab7e6c9852236e73aea33b1b36e7122149420c21c42a889",
+  "replication/double_hashing.py": "a9f85251a25b1ec0c6424162d6ccec6ecd1f1732d22f06c5ceaa6773674e15b6",
+  "replication/output.py": "04e627ea6569ad0906923f6c20b5520b2bd9af5370e15b67a15859dd9ff00708",
+  "replication/published.py": "b9a452c8aec5a4582fbf3011389a90787cb691f3bd54d01179055367a7cf3bef",
+  "replication/quality.py": "95cd6be7437fcdbfec1a19f375c15133d5dc02fafe3bd2ebf500801562abe96a",
+  "replication/replicate.py": "24dd558e5adb9eb924e4913438d8d3e03b221a6be1db184511520b5fe39697fe",
+  "replication/simulate.py": "920079cd9254572e63c7c520f8a5a94656434d8b51e9c153b246ef456edd0bca",
+  "replication/tables.py": "602c388cb14d8908567e28f0abfafe94c34d4e58ae11646b684b87ff626fd538",
+  "replication/validation.py": "e7572f0e0ec3d8266ae9b731fd382f082f8f0a2e1d1ff232f044e9835ec96bcb"
+}

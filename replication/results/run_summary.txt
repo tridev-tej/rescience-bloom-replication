@@ -1,0 +1,10 @@
+Invariant and exact small-state validation: passed
+Published cells: 124; matched: 99; exceptions: 25
+Table exceptions: T1=1, T2=8, T3=16, T4=0
+Figure CSV points: Figure 3=2103; Figure 4=40
+Monte Carlo: passed; 14 marginals; 120000 trials each; max |z|=1.610006027
+DH SBF mean FPR: 0.00649011688056267
+DH PBF mean FPR: 0.0144249701016404
+Complexity: 134 scopes; maximum CC=8
+Protocol deviations: none; integer capacity convention remains inferred
+Results: results/; measurements: measurements/

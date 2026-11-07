@@ -1,0 +1,53 @@
+title: "[Re] A Case for Partitioned Bloom Filters"
+authors:
+  - name: Tejesh Vaish
+    orcid: "0009-0007-5387-638X"
+    email: t@tejeshvaish.com
+    affiliations: "1,*"
+affiliations:
+  - code: 1
+    name: Independent researcher
+    address: Dubai, United Arab Emirates
+keywords: Bloom filters, false positives, double hashing, replication, Python
+code:
+  - url: https://github.com/tridev-tej/rescience-bloom-replication
+  - doi:
+  - swh:
+data:
+  - url:
+  - doi:
+replication:
+  - cite: "Paulo Sérgio Almeida. A Case for Partitioned Bloom Filters. IEEE Transactions on Computers 72(6), 1681–1691 (2023)."
+  - bib: almeida2023
+  - url: https://arxiv.org/abs/2009.11789v2
+  - doi: 10.1109/TC.2022.3218995
+abstract: "A Bloom filter can have a low average false-positive rate while returning many false positives for particular keys. This partial replication of Almeida’s finite-size analysis recomputes 124 cells from four tables and matches 99 at the reported precision. The largest discrepancies are at low load. A bound rules out the choice of a common positive integer insertion count as an explanation for four mean-rate gaps at 64 bits. At 512 bits and eight probes, exact enumeration finds a 49.81 percent false-positive rate for zero-step queries under standard double hashing. Partitioning removes step-dependent variation in this model and raises the average rate from 0.649 to 1.442 percent."
+bibliography: bibliography.bib
+type: Replication
+domain: Computer Science
+language: Python
+review:
+  - url:
+contributors:
+  - name:
+    orcid:
+    role: editor
+  - name:
+    orcid:
+    role: reviewer
+  - name:
+    orcid:
+    role: reviewer
+dates:
+  - received:
+  - accepted:
+  - published:
+article:
+  - number:
+  - doi:
+  - url:
+journal:
+  - name: ReScience C
+  - issn: "2430-3658"
+  - volume:
+  - issue:
