@@ -16,16 +16,16 @@ Under independent uniform hashing, four partitioned-to-standard mean
 false-positive ratios in his Table~2 exceed an upper bound valid for every
 common positive integer insertion count in both layouts. These are the
 quarter- and half-nominal-load values at 64 bits with four or eight probes.
-Integer rounding cannot explain these printed
-values. Their computational cause remains unresolved.
+Integer rounding cannot explain these printed values. Almeida reports a loop
+error and a matching corrected example (personal communication, 7 November
+2026). We have not independently reproduced his diagnosis.
 
 This partial replication covers four tables and two curves in Sections~3
-and~4, plus the three double-hashing mechanisms in Section~5. It recovers
-the nominal-load mean rates and fixed-key collision effects. Overall, 99
-of 124 printed cell occurrences match at the reported precision; ratios
-repeated across source tables are counted in each table.
-Table~\ref{tab:scope} separates the replicated conclusions, unresolved
-printed values, and exact double-hashing extension.
+and~4, plus three double-hashing mechanisms in Section~5. It recovers
+nominal-load mean rates and fixed-key collision effects. It matches 99
+of 124 original printed cell occurrences at the reported precision,
+counting repeated ratios in each source table.
+Table~\ref{tab:scope} summarizes the outcomes.
 
 \begin{table}[tbp]
 \centering
@@ -40,9 +40,10 @@ Replicated conclusions & Nominal-load mean rates and collision effects
 (source Tables~1, 3, and~4; Figures~3 and~4; Sections~\ref{sec:mean}
 and~\ref{sec:fixed}). The three double-hashing mechanisms are recovered
 (source Figures~5--7; Section~\ref{sec:double}). \\
-Unresolved printed values & Exceptions remain in source Tables~1--3.
-Four Table~2 ratios at 64 bits exceed a bound valid for every common
-positive integer insertion count (Section~\ref{sec:mean}). \\
+Original-table differences & 25 differences in Tables~1--3, including four
+Table~2 ratios above the bound at 64 bits. Almeida reports a loop error and
+a matching example; we have not independently reproduced his diagnosis
+(Section~\ref{sec:mean}). \\
 Exact extension & Uniform hash-pair enumeration at 512 bits, eight probes,
 and 44 insertions gives mean rates of 0.649\% (standard) and 1.442\%
 (partitioned) (Section~\ref{sec:double}). Source Figures~5--7 motivate
@@ -168,8 +169,17 @@ For every integer $n\ge1$, the lower bound $F_a\le F_s$ gives
 \]
 At $m=64$, the bound is 1.09842 for four probes and 1.54612 for eight,
 independent of $n$. The reported half- and quarter-load ratios exceed
-these bounds. The source formulas leave the cause of the difference
-unresolved.
+these bounds.
+
+Almeida (personal communication, 7 November 2026) reports an off-by-one
+error in a loop using $n$ that stopped one iteration early. For
+$m=64,k=4,n=2$, his corrected standard false-positive rate is
+$0.00020343338632548505$, with ratio $1.0569749279689804$.
+His ratio agrees numerically with our independent value,
+$1.0569749279689811$. No author code or corrected tables were supplied.
+We have not inspected his code or independently reproduced the reported error.
+The matching example does not establish that all 25 differences against the
+original published tables are resolved.
 
 \section{False positives for a fixed key}
 \label{sec:fixed}
@@ -229,19 +239,18 @@ uses a different joint distribution of insertion probes.
 
 \section{Scope and availability}
 
-The independent implementation recovers the nominal-load comparison and
-the concentration of false positives among keys with repeated probes.
-At low load, several printed ratios remain unresolved. The artifact
-preserves each source value beside the computed value, along with the
-model and integer count used for the comparison.
+The artifact retains all 25 differences against the original published
+tables, with each source value beside its computed value, model, and
+integer count. We have not independently reproduced Almeida's reported
+diagnosis (Section~\ref{sec:mean}).
 
 The results concern uniform hash outputs at finite filter sizes. The
 experiment does not measure deployed hash functions, workload-dependent
 key frequencies, SIMD throughput, or the applications in Sections~6 and
 7 of the source. The double-hashing extension covers one allocation and
 one load. The comparison values come from the public accepted manuscript,
-arXiv:2009.11789v2. The original author's code and experiments were
-not used, and the author has not been contacted about the discrepancies.
+arXiv:2009.11789v2. Almeida responded on 7 November 2026. The calculation
+uses no author code or experiments.
 
 The companion artifact contains the code, transcribed values, and
 generated tables and plots. A single Python command reruns the

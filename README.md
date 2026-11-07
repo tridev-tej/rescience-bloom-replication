@@ -5,7 +5,13 @@ Under independent uniform hashing, four partitioned-to-standard mean
 false-positive ratios in Table 2 exceed an upper bound valid for every common
 positive integer insertion count in both layouts. These are the quarter- and
 half-nominal-load values at 64 bits with four or eight probes. Integer rounding
-cannot explain these printed values. Their computational cause remains unresolved.
+cannot explain these printed values.
+
+Almeida (personal communication, 7 November 2026) reports an off-by-one loop
+error and a corrected example that agrees numerically with the independent
+calculation. He supplied neither original nor corrected code or tables for
+inspection. The reported diagnosis has not been independently reproduced.
+All 25 differences against the original published tables remain recorded.
 
 The calculation recovers the nominal-load mean rates and the concentration of
 false positives among keys with repeated probes. An exact double-hashing
@@ -31,8 +37,8 @@ calibration failure exits nonzero. Differences from the source's printed values
 are scientific results, so the program records them without changing the
 success criteria.
 
-Across four source tables, 99 of 124 printed cell occurrences match at the
-reported precision:
+Across four original published tables, 99 of 124 printed cell occurrences
+match at the reported precision:
 
 | Source | Cells | Match at printed precision | Differ |
 | --- | ---: | ---: | ---: |
