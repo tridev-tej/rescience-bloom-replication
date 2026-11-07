@@ -4,7 +4,7 @@
 
 def generate_latex_metadata(filename, article):
 
-    abstract = article.abstract.replace("&", "\&")
+    abstract = article.abstract.replace("&", r"\&")
     
     content = (
         "% DO NOT EDIT - automatically generated from {filename}\n\n"

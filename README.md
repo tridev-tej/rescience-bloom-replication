@@ -26,8 +26,7 @@ Read [the manuscript](manuscript/article.pdf) or start with the
 From the directory containing this README:
 
 ```sh
-cd replication
-python3 replicate.py
+(cd replication && python3 replicate.py)
 ```
 
 Python 3.11 or later. The experiment uses only the standard library and requires
@@ -73,17 +72,23 @@ metadata go to `replication/measurements/` and do not affect result hashes.
 Run this from the directory containing the README, after the experiment:
 
 ```sh
-make -C manuscript
+SOURCE_DATE_EPOCH=1794096000 FORCE_SOURCE_DATE=1 make -C manuscript
 ```
 
 The PDF build needs XeLaTeX, Biber matched to the installed BibLaTeX, Make,
-`rsvg-convert`, and PyYAML in the Python environment. A full TeX Live installation
-includes the TeX packages. The PDF build reads the regenerated experiment CSVs
-and SVGs. The [metadata](manuscript/metadata.yaml) follows the journal's schema.
-Its publication fields are reserved for the editorial process.
+`rsvg-convert`, PyYAML in the Python environment, and an installed `en_US.UTF-8`
+locale. The metadata helper sets this locale explicitly and fails if it is
+unavailable. A full TeX Live installation includes the TeX packages.
+
+The recipe above was tested with XeLaTeX/TeX Live 2025, Biber 2.21,
+Python 3.14.7 with PyYAML 6.0.3, and `rsvg-convert` 2.61.3. The PDF build reads
+the regenerated experiment CSVs and SVGs. The [metadata](manuscript/metadata.yaml)
+follows the journal's schema. Its publication fields are reserved for the
+editorial process.
 
 The manuscript uses the [ReScience C template](https://github.com/ReScience/template/tree/0978d0e5d9a86246789fd3468aec6fc71e39c944).
-Template changes mark the pre-submission status and render the ORCID badge with
-standard LaTeX color boxes. The template and fonts retain their upstream licenses.
+Template changes mark the pre-submission status, render the ORCID badge with
+standard LaTeX color boxes, and correct the Python literal used to escape
+ampersands in the abstract. The template and fonts retain their upstream licenses.
 The Python replication code is available under the [MIT License](replication/LICENSE).
 The submission draft is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
