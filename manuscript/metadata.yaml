@@ -21,7 +21,7 @@ replication:
   - bib: almeida2023
   - url: https://arxiv.org/abs/2009.11789v2
   - doi: 10.1109/TC.2022.3218995
-abstract: "A Bloom filter can have a low average false-positive rate while returning many false positives for particular keys. This partial replication of Almeida’s finite-size analysis recomputes 124 cells from four tables and matches 99 at the reported precision. The largest discrepancies are at low load. A bound rules out the choice of a common positive integer insertion count as an explanation for four mean-rate gaps at 64 bits. At 512 bits and eight probes, exact enumeration finds a 49.81 percent false-positive rate for zero-step queries under standard double hashing. Partitioning removes step-dependent variation in this model and raises the average rate from 0.649 to 1.442 percent."
+abstract: "Under independent uniform hashing, four partitioned-to-standard mean false-positive ratios in Almeida’s Table 2 at 64 bits exceed an upper bound valid for every common positive integer insertion count in both layouts. Integer rounding cannot explain these quarter- and half-nominal-load values with four or eight probes. This partial replication recovers the nominal-load mean rates and the concentration of false positives among keys with repeated probes. It matches 99 of 124 printed cell occurrences from four tables, counting repeated values in each source table. In an exact double-hashing extension at 512 bits, eight probes, and 44 insertions, zero-step standard queries have a 49.81 percent false-positive rate. Partitioning removes step-dependent variation in this uniform hash-pair model and raises the mean rate from 0.649 to 1.442 percent."
 bibliography: bibliography.bib
 type: Replication
 domain: Computer Science

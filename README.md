@@ -1,7 +1,18 @@
 # [Re] A Case for Partitioned Bloom Filters
 
-A partial replication of Almeida's finite-size results in Sections 3–5. Read
-[the manuscript](manuscript/article.pdf) or start with the
+A partial replication of Almeida's finite-size results in Sections 3–5.
+Under independent uniform hashing, four partitioned-to-standard mean
+false-positive ratios in Table 2 exceed an upper bound valid for every common
+positive integer insertion count in both layouts. These are the quarter- and
+half-nominal-load values at 64 bits with four or eight probes. Integer rounding
+cannot explain these printed values. Their computational cause remains unresolved.
+
+The calculation recovers the nominal-load mean rates and the concentration of
+false positives among keys with repeated probes. An exact double-hashing
+extension at 512 bits, eight probes, and 44 insertions finds a 49.81% rate for
+zero-step standard queries. Partitioning removes step-dependent variation in
+the uniform hash-pair model and raises the mean rate from 0.649% to 1.442%.
+Read [the manuscript](manuscript/article.pdf) or start with the
 [original paper and source record](SOURCE.md).
 
 ## Rerun the experiment
@@ -20,6 +31,9 @@ calibration failure exits nonzero. Differences from the source's printed values
 are scientific results, so the program records them without changing the
 success criteria.
 
+Across four source tables, 99 of 124 printed cell occurrences match at the
+reported precision:
+
 | Source | Cells | Match at printed precision | Differ |
 | --- | ---: | ---: | ---: |
 | Table 1 | 32 | 31 | 1 |
@@ -28,7 +42,7 @@ success criteria.
 | Table 4 | 20 | 20 | 0 |
 | Total | 124 | 99 | 25 |
 
-The Table 1 ratio repeated in Table 2 is compared in both tables. The
+Ratios repeated from Table 1 in Table 2 are counted in both tables. The
 [protocol](PROTOCOL.md) and [validation plan](replication/VALIDATION_PLAN.md)
 record the evaluation criteria and scope. The floor convention is inferred from
 the source's printed nominal-load values.
